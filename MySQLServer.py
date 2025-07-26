@@ -6,15 +6,16 @@ mydb = mysql.connector.connect(
     password = "learningdb"
 )
 
-if not mydb.is_connected():
-    print("❌ Failed to connect to the MySQL server.")
-else:
-    mycursor = mydb.cursor()
+except mysql.connector.Error as e:
+    print(f"❌ Error connecting to the MySQL server: {e}")
+   
 
-    mycursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
-    print("✅ Database 'alx_book_store' created successfully!")
+mycursor = mydb.cursor()
 
-    mycursor.close()
-    mydb.close()
+mycursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+print("✅ Database 'alx_book_store' created successfully!")
 
-    print("Database connection closed.")
+mycursor.close()
+mydb.close()
+
+print("Database connection closed.")
